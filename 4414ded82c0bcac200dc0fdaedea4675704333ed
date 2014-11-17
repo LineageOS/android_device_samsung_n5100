@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a122d0e_2e7968fd",
+        "filename": "include/telephony/ril.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 6521
+      },
+      "writtenOn": "2014-11-17T22:14:04Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "4414ded82c0bcac200dc0fdaedea4675704333ed",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a122d0e_ce1d54bf",
+        "filename": "include/telephony/ril.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 6521
+      },
+      "writtenOn": "2014-11-17T22:14:04Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "4414ded82c0bcac200dc0fdaedea4675704333ed",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a122d0e_ee2010fa",
+        "filename": "include/telephony/ril.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 3534,
+      "author": {
+        "id": 6521
+      },
+      "writtenOn": "2014-11-17T22:14:04Z",
+      "side": 1,
+      "message": "more",
+      "revId": "4414ded82c0bcac200dc0fdaedea4675704333ed",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a122d0e_8e235c05",
+        "filename": "include/telephony/ril.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 3558,
+      "author": {
+        "id": 6521
+      },
+      "writtenOn": "2014-11-17T22:14:04Z",
+      "side": 1,
+      "message": "more",
+      "revId": "4414ded82c0bcac200dc0fdaedea4675704333ed",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
