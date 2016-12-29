@@ -158,9 +158,6 @@ public class SamsungExynos4RIL extends RIL implements CommandsInterface {
             return null;
         }
 
-        // Time logging for RIL command and storing it in TelephonyHistogram.
-        addToRilHistogram(rr);
-
         if (getRilVersion() >= 13 && type == RESPONSE_SOLICITED_ACK_EXP) {
             Message msg;
             RILRequest response = RILRequest.obtain(RIL_RESPONSE_ACKNOWLEDGEMENT, null);
