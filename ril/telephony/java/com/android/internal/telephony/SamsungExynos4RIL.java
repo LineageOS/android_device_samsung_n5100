@@ -141,7 +141,7 @@ public class SamsungExynos4RIL extends RIL implements CommandsInterface {
 
 
     @Override
-    protected RILRequest processSolicited (Parcel p) {
+    protected RILRequest processSolicited (Parcel p, int type) {
         int serial, error;
         boolean found = false;
 
@@ -157,6 +157,22 @@ public class SamsungExynos4RIL extends RIL implements CommandsInterface {
                             + serial + " error: " + error);
             return null;
         }
+
+        // Time logging for RIL command and storing it in TelephonyHistogram.
+        addToRilHistogram(rr);
+
+        if (getRilVersion() >= 13 && type == RESPONSE_SOLICITED_ACK_EXP) {
+            Message msg;
+            RILRequest response = RILRequest.obtain(RIL_RESPONSE_ACKNOWLEDGEMENT, null);
+            msg = mSender.obtainMessage(EVENT_SEND_ACK, response);
+            acquireWakeLock(rr, FOR_ACK_WAKELOCK);
+            msg.sendToTarget();
+            if (RILJ_LOGD) {
+                riljLog("Response received for " + rr.serialString() + " " +
+                        requestToString(rr.mRequest) + " Sending ack to ril.cpp");
+            }
+        }
+
 
         Object ret = null;
 
@@ -445,11 +461,25 @@ public class SamsungExynos4RIL extends RIL implements CommandsInterface {
     }
 
     @Override
-    protected void
-    processUnsolicited (Parcel p) {
+    protected void processUnsolicited (Parcel p, int type) {
         int dataPosition = p.dataPosition();
-        int response = p.readInt();
+        int response;
         Object ret;
+
+        response = p.readInt();
+
+        // Follow new symantics of sending an Ack starting from RIL version 13
+        if (getRilVersion() >= 13 && type == RESPONSE_UNSOLICITED_ACK_EXP) {
+            Message msg;
+            RILRequest rr = RILRequest.obtain(RIL_RESPONSE_ACKNOWLEDGEMENT, null);
+            msg = mSender.obtainMessage(EVENT_SEND_ACK, rr);
+            acquireWakeLock(rr, FOR_ACK_WAKELOCK);
+            msg.sendToTarget();
+            if (RILJ_LOGD) {
+                riljLog("Unsol response received for " + responseToString(response) +
+                        " Sending ack to ril.cpp");
+            }
+        }
 
         try{switch(response) {
             case RIL_UNSOL_STK_PROACTIVE_COMMAND: ret = responseString(p); break;
@@ -459,7 +489,7 @@ public class SamsungExynos4RIL extends RIL implements CommandsInterface {
                 p.setDataPosition(dataPosition);
 
                 // Forward responses that we are not overriding to the super class
-                super.processUnsolicited(p);
+                super.processUnsolicited(p, type);
                 return;
         }} catch (Throwable tr) {
             Rlog.e(RILJ_LOG_TAG, "Exception processing unsol response: " + response +
