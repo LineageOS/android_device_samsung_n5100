@@ -9,7 +9,7 @@ $(call inherit-product, device/samsung/n5100/full_n5100.mk)
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := n5100
-PRODUCT_NAME := cm_n5100
+PRODUCT_NAME := lineage_n5100
 PRODUCT_BRAND := samsung
 PRODUCT_MODEL := GT-N5100
 PRODUCT_MANUFACTURER := samsung
